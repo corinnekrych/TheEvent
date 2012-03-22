@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+<testsuite name="behaviour of an event list, doing CRUD operations" errors="0" tests="2" failures="2" time="0.343" timestamp="2012-03-22T13:48:54">
+  <testcase classname="behaviour of an event list, doing CRUD operations" name="should add an event in the list" time="0.269"><failure>1: TypeError: Cannot find function init in object [object Object]. in file:///home/corinne/work/workspace/TheEvent/web-app/js/EventListSpec.js (line 6) 2: TypeError: Cannot find function init in object [object Object]. in file:///home/corinne/work/workspace/TheEvent/web-app/js/EventListSpec.js (line 11)</failure></testcase>
+  <testcase classname="behaviour of an event list, doing CRUD operations" name="should add a li in Html" time="0.028"><failure>1: TypeError: Cannot find function init in object [object Object]. in file:///home/corinne/work/workspace/TheEvent/web-app/js/EventListSpec.js (line 6) 2: TypeError: Cannot find function init in object [object Object]. in file:///home/corinne/work/workspace/TheEvent/web-app/js/EventListSpec.js (line 18)</failure></testcase>
+</testsuite>
+</testsuites>
