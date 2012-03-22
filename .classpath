@@ -94,6 +94,5 @@
 			<attribute name="com.springsource.sts.grails.core.SOURCE_FOLDER" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/jefklak-jasmine-junit-runner-8bd88b6"/>
 	<classpathentry kind="output" path="target-eclipse/classes"/>
 </classpath>
