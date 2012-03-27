@@ -9,14 +9,20 @@
 <script src="js/EventList.js"></script>
 <script src="js/Event.js"></script>
 <script	src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></script>
+<script src="js/lib/dust/dust.js"></script>
+<script src="js/lib/dust/compiler.js"></script>
+<script src="js/lib/dust/dust-helpers.js"></script>
+<script src="js/lib/dust/parser.js"></script>
+<script src="js/lib/dust/server.js"></script>
+<script src="js/TestDust.js"></script>
 </head>
 <body>
 	<section data-role="page" id="section-events">
-
 		<div data-role="header">
 			<h1>Event List</h1>
 		</div>
-
+       <!-- /header -->
+        <button type="button" onclick="addToListWithDust()">Add To List With Dust</button>
 		<div data-role="content">
 			<ul data-role="listview" data-inset="true" data-filter="true" id="list-events">
 			</ul>

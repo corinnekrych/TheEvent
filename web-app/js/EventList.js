@@ -41,3 +41,14 @@ EventList.prototype.renderToHtml = function() {
 	}
 	$('#list-events').listview('refresh');
 };
+
+EventList.prototype.renderToDustTemplate = function() {
+	// {"date":"2012-03-25T22:00:00Z","id":1,"name":"ouiiiiiiii"}
+	var template = '<li><a href="#section-show-event?id=1 data-transition="fade">{#events}{name};{date}{/events}</a></li>';
+	var compiled = dust.compile(template, "intro");
+	dust.loadSource(compiled);
+	dust.render("intro", this.events, function(err, out) {
+		$("#list-events").append(out);
+		$('#list-events').listview('refresh');
+	});
+};
