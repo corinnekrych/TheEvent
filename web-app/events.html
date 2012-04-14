@@ -9,6 +9,7 @@
 <script src="js/EventList.js"></script>
 <script src="js/Event.js"></script>
 <script	src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></script>
+<script	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="js/lib/dust/dust.js"></script>
 <script src="js/lib/dust/compiler.js"></script>
 <script src="js/lib/dust/dust-helpers.js"></script>
@@ -33,15 +34,22 @@
 		<div data-role="header">
 			<h1>Show Event</h1>
 		</div>
-		<div data-role="content">
-
-			<div data-role="fieldcontain" id="field-event-name">
-				<label for="name">Name</label>
-				<input type="text" name="name" id="input-event-name" value="" />
-			</div>
-
-		</div>		
-    		<a href="#section-events" data-role="button" data-rel="back">Back</a>
+		<form id="form-update-event">
+     		<ul data-role="listview" data-inset="true"  id="field-event-name">
+	   			<li data-role="fieldcontain">
+		    		<label for="name">Name : </label>
+					<input type="text" name="name" id="input-event-name" value="" class="required" minlength="2"/>
+	   			</li>
+				<li data-role="fieldcontain" data-inset="true" id="field-event-date">
+					<label for="date">Date : </label>
+					<input type="text" name="date" id="input-event-date" value="" class="required date" />
+				</li>
+     		</ul>
+	    	<a href="#section-events" data-role="button" data-inline="true" data-rel="back">Back</a>
+	    	<button type="submit"  name="submit" value="submit-value" >Modify</a>
+		</form>
+		
+				
 	</section>
 
 </body>
