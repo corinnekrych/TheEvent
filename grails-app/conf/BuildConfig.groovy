@@ -7,6 +7,7 @@ grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.plugin.location.jsonp = "/home/corinne/work/workspace/jsonp"
 grails.plugin.location."json-dust" = "/home/corinne/work/workspace/json-dust"
+
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
