@@ -1,0 +1,8 @@
+#Grails Metadata file
+#Mon Apr 02 21:36:56 CEST 2012
+app.grails.version=2.0.2
+app.name=TheEvent
+app.servlet.version=2.5
+app.version=0.1
+plugins.json-rest-api=1.0.11
+plugins.jsonp=0.1
