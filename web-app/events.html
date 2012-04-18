@@ -15,15 +15,13 @@
 <script src="js/lib/dust/dust-helpers.js"></script>
 <script src="js/lib/dust/parser.js"></script>
 <script src="js/lib/dust/server.js"></script>
-<script src="js/TestDust.js"></script>
 </head>
 <body>
 	<section data-role="page" id="section-events">
 		<div data-role="header">
 			<h1>Event List</h1>
 		</div>
-       <!-- /header -->
-        <button type="button" onclick="addToListWithDust()">Add To List With Dust</button>
+    <!-- /header -->
 		<div data-role="content">
 			<ul data-role="listview" data-inset="true" data-filter="true" id="list-events">
 			</ul>
@@ -46,7 +44,7 @@
 				</li>
      		</ul>
 	    	<a href="#section-events" data-role="button" data-inline="true" data-rel="back">Back</a>
-	    	<button type="submit"  name="submit" value="submit-value" >Modify</a>
+	    	<button type="submit"  name="submit" data-inline="true" value="submit-value" >Modify</button>
 		</form>
 		
 				

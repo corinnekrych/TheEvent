@@ -32,23 +32,17 @@ function getEvents() {
 	});
 }
 
-
 EventList.prototype.renderToHtml = function() {
-	for ( var i = 0; i < this.events.length; i++) {
-		var event = this.events[i];
-		$("#list-events").append('<li><a href="#section-show-event?id='+ event.id + '" data-transition="fade">' + event.name + ";" + event.date +'</a></li>');
-		$("#section-events").data('Event_' + event.id, event);
-	}
-	$('#list-events').listview('refresh');
-};
-
-EventList.prototype.renderToDustTemplate = function() {
-	// {"date":"2012-03-25T22:00:00Z","id":1,"name":"ouiiiiiiii"}
-	var template = '<li><a href="#section-show-event?id=1 data-transition="fade">{#events}{name};{date}{/events}</a></li>';
+	var template = '{#events}<li><a href="#section-show-event?id={id}" data-transition="fade">{name};{date}</a></li>{/events}';
 	var compiled = dust.compile(template, "intro");
 	dust.loadSource(compiled);
-	dust.render("intro", this.events, function(err, out) {
+	var context = this.events;
+	dust.render("intro", context, function(err, out) {
 		$("#list-events").append(out);
+		for ( var i = 0; i < context.events.length; i++) {
+			var event = context.events[i];
+			$("#section-events").data('Event_' + event.id, event);
+		}
 		$('#list-events').listview('refresh');
 	});
 };

@@ -3,7 +3,7 @@ function addToListWithDust() {
 		cache : false,
 		type : "GET",
 		async : false,
-		dataType : "json",
+		dataType : "jsonp",
 		url : 'http://localhost:8080/TheEvent/event/list',
 		success : function(data) {
 			var eventList = new EventList();

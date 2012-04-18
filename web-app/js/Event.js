@@ -21,8 +21,7 @@ Event.prototype.renderToHtml = function() {
 function getUrlVars() {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++)
-    {
+    for(var i = 0; i < hashes.length; i++) {
         hash = hashes[i].split('=');
         vars.push(hash[0]);
         vars[hash[0]] = hash[1];
@@ -36,10 +35,10 @@ $('#form-update-event').submit(function() {
 	$('#form-update-event').validate();
     
     // Submit the form
-    $.post("/forms/requestProcessor.php", form1Var.serialize(), function(data){
-      confirmationVar.text(data);
-      hideContentTransition();
-      showConfirmation();
-    });        
+//    $.post("/forms/requestProcessor.php", form1Var.serialize(), function(data){
+//      confirmationVar.text(data);
+//      hideContentTransition();
+//      showConfirmation();
+//    });        
     return false;      
 });    
