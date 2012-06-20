@@ -1,0 +1,10 @@
+#Grails Metadata file
+<<<<<<< HEAD
+#Tue Jun 12 22:10:00 CEST 2012
+=======
+#Tue Jun 12 22:10:28 CEST 2012
+>>>>>>> 5c14e8d126e2e62aef9f093ac270f31a169321a0
+app.grails.version=2.0.4
+app.name=TheEvent
+app.servlet.version=2.5
+app.version=0.2

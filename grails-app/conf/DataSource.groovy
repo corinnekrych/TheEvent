@@ -13,10 +13,12 @@ hibernate {
 environments {
     development {
         dataSource {
+            grails.serverURL = "http://localhost:8080/${appName}"
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devDb;MVCC=TRUE"
         }
     }
+    
     test {
         dataSource {
             dbCreate = "update"
