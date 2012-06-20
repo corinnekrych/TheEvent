@@ -33,6 +33,7 @@ class EventController {
     }
 
     def save() {
+      println "in the inputs" + params
         def eventInstance = new Event(params)
         if (!eventInstance.save(flush: true)) {
             render(view: "create", model: [eventInstance: eventInstance])
@@ -67,17 +68,22 @@ class EventController {
     }
 
     def update() {
-        def eventInstance = Event.get(params.id)
+      println "in the inputs" + params
+      Event eventReceived = new Event(JSON.parse(params.event))
+      
+        def eventInstance = Event.get(eventReceived.id)
         if (!eventInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'event.label', default: 'Event'), params.id])
             redirect(action: "list")
             return
         }
 
-        if (params.version) {
-            def version = params.version.toLong()
-            if (eventInstance.version > version) {
-                eventInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+        if (eventReceived.version) {
+          println eventReceived.version 
+          println eventInstance 
+          def version = eventReceived.version.toLong()
+          if (eventInstance.version > version) {
+            eventInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'event.label', default: 'Event')] as Object[],
                           "Another user has updated this Event while you were editing")
                 render(view: "edit", model: [eventInstance: eventInstance])
@@ -85,7 +91,7 @@ class EventController {
             }
         }
 
-        eventInstance.properties = params
+        eventInstance.properties = eventReceived.properties
 
         if (!eventInstance.save(flush: true)) {
             render(view: "edit", model: [eventInstance: eventInstance])

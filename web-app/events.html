@@ -32,20 +32,29 @@
 		<div data-role="header">
 			<h1>Show Event</h1>
 		</div>
-		<form id="form-update-event">
-     		<ul data-role="listview" data-inset="true"  id="field-event-name">
+		<div id="form-update-event">
+     		<ul data-role="listview" data-inset="true">
 	   			<li data-role="fieldcontain">
 		    		<label for="name">Name : </label>
 					<input type="text" name="name" id="input-event-name" value="" class="required" minlength="2"/>
 	   			</li>
-				<li data-role="fieldcontain" data-inset="true" id="field-event-date">
+				<li data-role="fieldcontain" data-inset="true">
 					<label for="date">Date : </label>
 					<input type="text" name="date" id="input-event-date" value="" class="required date" />
 				</li>
+				<li>
+					<input type="hidden" name="id" id="input-event-id"/>
+				</li>
+				<li>
+					<input type="hidden" name="version" id="input-event-version"/>
+				</li>
+				<li>
+					<input type="hidden" name="class" id="input-event-class"/>
+				</li>
      		</ul>
 	    	<a href="#section-events" data-role="button" data-inline="true" data-rel="back">Back</a>
-	    	<button type="submit"  name="submit" data-inline="true" value="submit-value" >Modify</button>
-		</form>
+	    	<a href="#section-events" data-role="button" data-inline="true" id="submit-event">Modify</a>
+		</div>
 		
 				
 	</section>

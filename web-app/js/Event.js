@@ -13,7 +13,14 @@ function showEvent(id) {
 	$('#field-event-name').fieldcontain('refresh');
 	$('#input-event-date').val(event.date);
 	$('#field-event-date').fieldcontain('refresh');
+	$('#input-event-id').val(event.id);
+	$('#field-event-id').fieldcontain('refresh');
+	$('#input-event-version').val(event.version);
+	$('#field-event-version').fieldcontain('refresh');
+	$('#input-event-class').val(event.class);
+	$('#field-event-class').fieldcontain('refresh');
 }
+
 
 Event.prototype.renderToHtml = function() {
 };
@@ -31,14 +38,63 @@ function getUrlVars() {
 
 
 
-$('#form-update-event').submit(function() {
-	$('#form-update-event').validate();
+
+function serializeObject(inputs) {
+	  var arrayData, objectData;
+	  arrayData = inputs;
+	  objectData = {};
+
+	  $.each(arrayData, function() {
+	    var value;
+
+	    if (this.value != null) {
+	      value = this.value;
+	    } else {
+	      value = '';
+	    }
+
+	    if (objectData[this.name] != null) {
+	      if (!objectData[this.name].push) {
+	        objectData[this.name] = [objectData[this.name]];
+	      }
+
+	      objectData[this.name].push(value);
+	    } else {
+	      objectData[this.name] = value;
+	    }
+	  });
+
+	  return objectData;
+	}
+
+
+
+
+
+
+
+$("#submit-event").live("click tap", function(){
+	var div = $("#form-update-event");
+	var inputs = div.find("input");
+	var obj = serializeObject(inputs);
+    var txt ={event:JSON.stringify(obj)};
     
-    // Submit the form
-//    $.post("/forms/requestProcessor.php", form1Var.serialize(), function(data){
-//      confirmationVar.text(data);
-//      hideContentTransition();
-//      showConfirmation();
-//    });        
-    return false;      
-});    
+    
+    
+    	$.ajax({
+    		cache : false,
+    		type : "POST",
+    		async : false,
+    		data : txt,
+    		dataType : "jsonp",
+    		url : 'http://localhost:8080/TheEvent/event/update',
+    		success : function(data) {
+    		    alert('success');
+    		},
+    		error : function(xhr) {
+    			alert(xhr.responseText);
+    		}
+    	});
+    
+});
+
