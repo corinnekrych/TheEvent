@@ -6,5 +6,7 @@ class Event {
     }
 	
 	String name
-	Date date
+  //String firstname
+  //int age
+	String date
 }
