@@ -3,6 +3,7 @@ package theevent
 import grails.converters.JSON
 import groovy.json.JsonBuilder;
 
+import org.codehaus.groovy.grails.web.json.JSONObject;
 import org.springframework.dao.DataIntegrityViolationException
 
 class EventController {
@@ -69,19 +70,18 @@ class EventController {
 
     def update() {
       println "in the inputs" + params
-      Event eventReceived = new Event(JSON.parse(params.event))
-      
-        def eventInstance = Event.get(eventReceived.id)
+      def jsonObject = JSON.parse(params.event)
+      Event eventReceived = new Event(jsonObject)
+
+        def eventInstance = Event.get(jsonObject.id)
         if (!eventInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'event.label', default: 'Event'), params.id])
             redirect(action: "list")
             return
         }
 
-        if (eventReceived.version) {
-          println eventReceived.version 
-          println eventInstance 
-          def version = eventReceived.version.toLong()
+        if (jsonObject.version) {
+          def version = jsonObject.version.toLong()
           if (eventInstance.version > version) {
             eventInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'event.label', default: 'Event')] as Object[],
