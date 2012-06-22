@@ -5,8 +5,8 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
-grails.plugin.location.jsonp = "/home/corinne/work/workspace/jsonp"
-grails.plugin.location."json-dust" = "/home/corinne/work/workspace/json-dust"
+grails.plugin.location.jsonp = "/home/fabrice/workspace/jsonp"
+grails.plugin.location."json-dust" = "/home/fabrice/workspace/json-dust"
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies

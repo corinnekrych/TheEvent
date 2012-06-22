@@ -21,80 +21,72 @@ function showEvent(id) {
 	$('#field-event-class').fieldcontain('refresh');
 }
 
-
 Event.prototype.renderToHtml = function() {
 };
 
 function getUrlVars() {
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++) {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
-    }
-    return vars;
+	var vars = [], hash;
+	var hashes = window.location.href.slice(
+			window.location.href.indexOf('?') + 1).split('&');
+	for ( var i = 0; i < hashes.length; i++) {
+		hash = hashes[i].split('=');
+		vars.push(hash[0]);
+		vars[hash[0]] = hash[1];
+	}
+	return vars;
 }
 
-
-
-
 function serializeObject(inputs) {
-	  var arrayData, objectData;
-	  arrayData = inputs;
-	  objectData = {};
+	var arrayData, objectData;
+	arrayData = inputs;
+	objectData = {};
 
-	  $.each(arrayData, function() {
-	    var value;
+	$.each(arrayData, function() {
+		var value;
 
-	    if (this.value != null) {
-	      value = this.value;
-	    } else {
-	      value = '';
-	    }
+		if (this.value != null) {
+			value = this.value;
+		} else {
+			value = '';
+		}
 
-	    if (objectData[this.name] != null) {
-	      if (!objectData[this.name].push) {
-	        objectData[this.name] = [objectData[this.name]];
-	      }
+		if (objectData[this.name] != null) {
+			if (!objectData[this.name].push) {
+				objectData[this.name] = [ objectData[this.name] ];
+			}
 
-	      objectData[this.name].push(value);
-	    } else {
-	      objectData[this.name] = value;
-	    }
-	  });
+			objectData[this.name].push(value);
+		} else {
+			objectData[this.name] = value;
+		}
+	});
 
-	  return objectData;
-	}
+	return objectData;
+}
 
-
-
-
-
-
-
-$("#submit-event").live("click tap", function(){
+$("#submit-event").live("click tap", function() {
 	var div = $("#form-update-event");
 	var inputs = div.find("input");
 	var obj = serializeObject(inputs);
-    var txt ={event:JSON.stringify(obj)};
-    
-    
-    
-    	$.ajax({
-    		cache : false,
-    		type : "POST",
-    		async : false,
-    		data : txt,
-    		dataType : "jsonp",
-    		url : 'http://localhost:8080/TheEvent/event/update',
-    		success : function(data) {
-    		    alert('success');
-    		},
-    		error : function(xhr) {
-    			alert(xhr.responseText);
-    		}
-    	});
-    
-});
+	var txt = {
+		event : JSON.stringify(obj)
+	};
 
+	$.ajax({
+		cache : false,
+		type : "POST",
+		async : false,
+		data : txt,
+		dataType : "jsonp",
+		url : 'http://localhost:8080/TheEvent/event/update',
+		success : function(data) {
+			//var event = new Event(data);
+			var event = $("#section-events").data('Event_' + data.id);
+			$(event).trigger("refresh-event"+ data.id + "-list", data);
+		},
+		error : function(xhr) {
+			alert(xhr.responseText);
+		}
+	});
+
+});

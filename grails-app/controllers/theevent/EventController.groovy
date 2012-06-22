@@ -98,8 +98,7 @@ class EventController {
             return
         }
 
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'event.label', default: 'Event'), eventInstance.id])
-        redirect(action: "show", id: eventInstance.id)
+		    render eventInstance as JSON
     }
 
     def delete() {
