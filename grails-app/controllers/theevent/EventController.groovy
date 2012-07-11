@@ -1,6 +1,7 @@
 package theevent
 
 import grails.converters.JSON
+import grails.validation.ValidationErrors
 import groovy.json.JsonBuilder;
 
 import org.codehaus.groovy.grails.web.json.JSONObject;
@@ -86,7 +87,9 @@ class EventController {
             eventInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'event.label', default: 'Event')] as Object[],
                           "Another user has updated this Event while you were editing")
-                render(view: "edit", model: [eventInstance: eventInstance])
+                //render(view: "edit", model: [eventInstance: eventInstance])
+                ValidationErrors validationErrors = eventInstance.errors
+                render validationErrors as JSON
                 return
             }
         }
@@ -94,11 +97,11 @@ class EventController {
         eventInstance.properties = eventReceived.properties
 
         if (!eventInstance.save(flush: true)) {
-            render(view: "edit", model: [eventInstance: eventInstance])
+            //render(view: "edit", model: [eventInstance: eventInstance])
             return
         }
 
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'event.label', default: 'Event'), eventInstance.id])
+		    flash.message = message(code: 'default.updated.message', args: [message(code: 'event.label', default: 'Event'), eventInstance.id])
         redirect(action: "show", id: eventInstance.id)
     }
 
