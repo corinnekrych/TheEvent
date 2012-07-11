@@ -4,59 +4,66 @@
 <title>My Page</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css" />
+
+<link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css" />
+
 <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script src="js/EventList.js"></script>
 <script src="js/Event.js"></script>
 <script	src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></script>
 <script	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-<script src="js/lib/dust/dust.js"></script>
-<script src="js/lib/dust/compiler.js"></script>
-<script src="js/lib/dust/dust-helpers.js"></script>
-<script src="js/lib/dust/parser.js"></script>
-<script src="js/lib/dust/server.js"></script>
+
 </head>
+
 <body>
+
 	<section data-role="page" id="section-events">
 		<div data-role="header">
-			<h1>Event List</h1>
+			<h1>Event</h1>
 		</div>
-    <!-- /header -->
 		<div data-role="content">
-			<ul data-role="listview" data-inset="true" data-filter="true" id="list-events">
+			<ul data-role="listview" data-inset="true" data-filter="true"
+				id="list-events">
 			</ul>
 		</div>
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#section-show-event" data-role="button" data-icon="plus">Add</a></li>
+				</ul>
+			</div>
+		</div>
 	</section>
-	
+
 	<section data-role="page" id="section-show-event">
-		<div data-role="header">
-			<h1>Show Event</h1>
+		<div data-role="header" id="show-event">
+			<a href="#section-events" data-icon="arrow-l">Cancel</a>
+			<h1>Event</h1>
 		</div>
 		<div id="form-update-event">
-     		<ul data-role="listview" data-inset="true">
-	   			<li data-role="fieldcontain">
-		    		<label for="name">Name : </label>
-					<input type="text" name="name" id="input-event-name" value="" class="required" minlength="2"/>
-	   			</li>
+			<ul data-role="listview" data-inset="true">
+				<li data-role="fieldcontain">
+					<label for="name">Name : </label>
+					<input type="text" name="name" id="input-event-name" value="" />
+				</li>
 				<li data-role="fieldcontain" data-inset="true">
-					<label for="date">Date : </label>
-					<input type="text" name="date" id="input-event-date" value="" class="required date" />
+					<label for="date">Date : </label> 
+					<input type="text" name="date" id="input-event-date" value="" />
 				</li>
-				<li>
-					<input type="hidden" name="id" id="input-event-id"/>
-				</li>
-				<li>
-					<input type="hidden" name="version" id="input-event-version"/>
-				</li>
-				<li>
-					<input type="hidden" name="class" id="input-event-class"/>
-				</li>
-     		</ul>
-	    	<a href="#section-events" data-role="button" data-inline="true" data-rel="back">Back</a>
-	    	<a href="#section-events" data-role="button" data-inline="true" id="submit-event">Modify</a>
+			</ul>
+			<input type="hidden" name="id" id="input-event-id" /> 
+			<input type="hidden" name="version" id="input-event-version" /> 
+			<input type="hidden" name="class" id="input-event-class" />
 		</div>
-		
-				
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#section-events" data-role="button" data-icon="delete" id="delete-event">Delete</a></li> 
+					<li><a href="#section-events" data-icon="save" id="submit-event">Save</a></li>
+				</ul>
+			</div>
+		</div>
 	</section>
 
 </body>

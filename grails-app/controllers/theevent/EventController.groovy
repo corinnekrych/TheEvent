@@ -13,13 +13,6 @@ class EventController {
     def index() {
         redirect(action: "list", params: params)
     }
-
-	
-	def list2() {
-		render(contentType: "text/json") {
-		  event("name":"fabrice")
-		}
-	}
 	
     def list() {
 
@@ -30,19 +23,25 @@ class EventController {
     }
 
     def create() {
-        [eventInstance: new Event(params)]
+       [eventInstance: new Event(params)]
     }
 
     def save() {
-      println "in the inputs" + params
-        def eventInstance = new Event(params)
+      def jsonObject = JSON.parse(params.event)
+      Event eventInstance = new Event(jsonObject)
         if (!eventInstance.save(flush: true)) {
-            render(view: "create", model: [eventInstance: eventInstance])
+//            render(view: "create", model: [eventInstance: eventInstance])
             return
         }
-
-		flash.message = message(code: 'default.created.message', args: [message(code: 'event.label', default: 'Event'), eventInstance.id])
-        redirect(action: "show", id: eventInstance.id)
+      render eventInstance as JSON
+//        def eventInstance = new Event(params)
+//        if (!eventInstance.save(flush: true)) {
+//            render(view: "create", model: [eventInstance: eventInstance])
+//            return
+//        }
+//
+//		flash.message = message(code: 'default.created.message', args: [message(code: 'event.label', default: 'Event'), eventInstance.id])
+//        redirect(action: "show", id: eventInstance.id)
     }
 
     def show() {
@@ -69,7 +68,6 @@ class EventController {
     }
 
     def update() {
-      println "in the inputs" + params
       def jsonObject = JSON.parse(params.event)
       Event eventReceived = new Event(jsonObject)
 
@@ -102,21 +100,24 @@ class EventController {
     }
 
     def delete() {
+      println "in the inputs" + params
+      def eventId = params.id
         def eventInstance = Event.get(params.id)
         if (!eventInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'event.label', default: 'Event'), params.id])
-            redirect(action: "list")
-            return
+//			flash.message = message(code: 'default.not.found.message', args: [message(code: 'event.label', default: 'Event'), params.id])
+//            redirect(action: "list")
+            
         }
 
         try {
             eventInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'event.label', default: 'Event'), params.id])
-            redirect(action: "list")
+//			flash.message = message(code: 'default.deleted.message', args: [message(code: 'event.label', default: 'Event'), params.id])
+//            redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'event.label', default: 'Event'), params.id])
-            redirect(action: "show", id: params.id)
+//			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'event.label', default: 'Event'), params.id])
+//            redirect(action: "show", id: params.id)
         }
+        render eventInstance as JSON
     }
 }

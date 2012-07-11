@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Page</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script	src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></script>
+</head>
+
+<body>
+	<section data-role="page" id="section-events">
+		<div data-role="header">
+			<h1>Event</h1>
+		</div>
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true" data-filter="true" id="list-events">
+				<li><a href="#section-show-event?id=2" data-transition="fade" >blah</a></li>
+				<li><a href="#section-show-event?id=1" data-transition="fade" >blah</a></li>
+			</ul>
+		</div>
+		<div data-role="footer">
+			<a href="#section-show-event" data-role="button" data-icon="plus">Add</a>
+		</div>
+	</section>
+	
+	<section data-role="page" id="section-show-event">
+		<div data-role="header" id="show-event">
+	    	<a href="#section-events" data-icon="arrow-l">Cancel</a>
+			<h1>Event</h1>
+	    	<a href="#section-events" data-icon="save" id="submit-event">Save</a>
+		</div>
+		<div id="form-update-event">
+     		<ul data-role="listview" data-inset="true">
+					<input type="hidden" name="class" id="input-event-class"/>
+     		</ul>
+		</div>
+		<div data-role="footer">
+			<a href="#section-events" data-role="button" data-icon="delete" id="delete-event">Delete</a>
+		</div>
+		
+				
+	</section>
+
+</body>
+</html>
