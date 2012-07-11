@@ -2,10 +2,24 @@ function Event() {
 	this.event = [];
 }
 
-$('#section-show-event').live('pageshow', function(event) {
-	var id = getUrlVars()["id"];
-	showEvent(id);
+$('#section-show-event').live('pageshow', function(e) {
+	var url = $(e.target).attr("data-url");
+	var matches = url.match(/\?id=(.*)/);
+	if (matches != null) {
+		showEvent(matches[1]);
+	} else {
+		createEvent();
+	}
 });
+
+function createEvent() {
+	var div = $("#form-update-event");
+	var inputs = div.find("input");
+	$.each(inputs, function (index, element) {
+		$(element).val("");
+	});
+	$("#delete-event").hide();
+}
 
 function showEvent(id) {
 	var event = $("#section-events").data("Event_" + id);
@@ -19,82 +33,91 @@ function showEvent(id) {
 	$('#field-event-version').fieldcontain('refresh');
 	$('#input-event-class').val(event.class);
 	$('#field-event-class').fieldcontain('refresh');
+	$("#delete-event").show();
 }
-
 
 Event.prototype.renderToHtml = function() {
 };
 
-function getUrlVars() {
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++) {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
-    }
-    return vars;
+function serializeObject(inputs) {
+	var arrayData, objectData;
+	arrayData = inputs;
+	objectData = {};
+
+	$.each(arrayData, function() {
+		var value;
+
+		if (this.value != null) {
+			value = this.value;
+		} else {
+			value = '';
+		}
+
+		if (objectData[this.name] != null) {
+			if (!objectData[this.name].push) {
+				objectData[this.name] = [ objectData[this.name] ];
+			}
+
+			objectData[this.name].push(value);
+		} else {
+			objectData[this.name] = value;
+		}
+	});
+
+	return objectData;
 }
 
-
-
-
-function serializeObject(inputs) {
-	  var arrayData, objectData;
-	  arrayData = inputs;
-	  objectData = {};
-
-	  $.each(arrayData, function() {
-	    var value;
-
-	    if (this.value != null) {
-	      value = this.value;
-	    } else {
-	      value = '';
-	    }
-
-	    if (objectData[this.name] != null) {
-	      if (!objectData[this.name].push) {
-	        objectData[this.name] = [objectData[this.name]];
-	      }
-
-	      objectData[this.name].push(value);
-	    } else {
-	      objectData[this.name] = value;
-	    }
-	  });
-
-	  return objectData;
-	}
-
-
-
-
-
-
-
-$("#submit-event").live("click tap", function(){
+$("#submit-event").live("click tap", function() {
 	var div = $("#form-update-event");
 	var inputs = div.find("input");
 	var obj = serializeObject(inputs);
-    var txt ={event:JSON.stringify(obj)};
-    
-    
-    
-    	$.ajax({
-    		cache : false,
-    		type : "POST",
-    		async : false,
-    		data : txt,
-    		dataType : "jsonp",
-    		url : 'http://localhost:8080/TheEvent/event/update',
-    		success : function(data) {
-    		    alert('success');
-    		},
-    		error : function(xhr) {
-    			alert(xhr.responseText);
-    		}
-    	});
-    
+	var action = "update";
+	if (obj.id == "") {
+		action= "save";
+	}
+	var txt = {
+		event : JSON.stringify(obj)
+	};
+
+	$.ajax({
+		cache : false,
+		type : "POST",
+		async : false,
+		data : txt,
+		dataType : "jsonp",
+		url : serverUrl + '/event/' + action,
+		success : function(data) {
+			if (action == "save") {
+				addEventOnSection(data);
+				$('#list-events').listview('refresh');
+			} else {
+				var event = $("#section-events").data('Event_' + data.id);
+				$(event).trigger("refresh-event"+ data.id + "-list", data);
+			}
+		},
+		error : function(xhr) {
+			alert(xhr.responseText);
+		}
+	});
+
 });
 
+
+$("#delete-event").live("click tap", function() {
+	var eventId = $('#input-event-id').val();
+	var txt = { id : eventId };
+	$.ajax({
+		cache : false,
+		type : "POST",
+		async : false,
+		data : txt,
+		dataType : "jsonp",
+		url : serverUrl + '/event/delete',
+		success : function(data) {
+			removeEventOnSection(data.id);
+		},
+		error : function(xhr) {
+			alert(xhr.responseText);
+		}
+	});
+});
