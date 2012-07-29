@@ -10,10 +10,10 @@ EventList.prototype.get = function(index) {
 	return this.events[index];
 };
 
-//serverUrl = 'http://localhost:8080/TheEvent';
-serverUrl = 'http://TheEvent.cloudfoundry.com'	
+serverUrl = 'http://localhost:8080/TheEvent';
+//serverUrl = 'http://TheEvent.cloudfoundry.com'	
 
-$('#section-events').live('pageinit', function(event) {
+$('#section-events').live('pageinit', function(e) {
 	getEvents();
 });
 
@@ -39,8 +39,8 @@ function getEvents() {
 
 EventList.prototype.renderToHtml = function() {
 	var context = this.events;
-	for ( var i = 0; i < context.events.length; i++) {
-		var event = context.events[i];
+	for ( var i = 0; i < context.length; i++) {
+		var event = context[i];
 		addEventOnSection(event);
 	}
 	$('#list-events').listview('refresh');

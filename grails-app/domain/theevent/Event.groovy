@@ -9,4 +9,5 @@ class Event {
   //String firstname
   //int age
 	String date
+  Boolean booleanType
 }

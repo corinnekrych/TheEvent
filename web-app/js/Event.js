@@ -16,7 +16,9 @@ function createEvent() {
 	var div = $("#form-update-event");
 	var inputs = div.find("input");
 	$.each(inputs, function (index, element) {
+		
 		$(element).val("");
+		
 	});
 	$("#delete-event").hide();
 }
@@ -27,6 +29,10 @@ function showEvent(id) {
 	$('#field-event-name').fieldcontain('refresh');
 	$('#input-event-date').val(event.date);
 	$('#field-event-date').fieldcontain('refresh');
+	
+	$('#input-event-booleanType').val(event.booleanType);
+	$('#field-event-booleanType').fieldcontain('refresh');
+	
 	$('#input-event-id').val(event.id);
 	$('#field-event-id').fieldcontain('refresh');
 	$('#input-event-version').val(event.version);
@@ -40,19 +46,23 @@ Event.prototype.renderToHtml = function() {
 };
 
 function serializeObject(inputs) {
-	var arrayData, objectData;
-	arrayData = inputs;
-	objectData = {};
+	var objectData = {};
 
-	$.each(arrayData, function() {
+	$.each(inputs, function() {
 		var value;
 
-		if (this.value != null) {
-			value = this.value;
+		if (this.type == "radio" ) {
+			value = this.checked;
+		} else if (this.type == "checkbox" ) {
+			value = this.checked;
 		} else {
-			value = '';
+			if (this.value != null) {
+				value = this.value;
+			} else {
+				value = '';
+			}
 		}
-
+		
 		if (objectData[this.name] != null) {
 			if (!objectData[this.name].push) {
 				objectData[this.name] = [ objectData[this.name] ];

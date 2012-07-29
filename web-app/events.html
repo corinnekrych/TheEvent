@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet"
-	href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css" />
+	href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
 
 <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script src="js/EventList.js"></script>
 <script src="js/Event.js"></script>
-<script	src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></script>
+<script	src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
 <script	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 
 </head>
@@ -19,7 +19,7 @@
 <body>
 
 	<section data-role="page" id="section-events">
-		<div data-role="header">
+		<div data-role="header" data-position="fixed">
 			<h1>Event</h1>
 		</div>
 		<div data-role="content">
@@ -44,13 +44,43 @@
 		<div id="form-update-event">
 			<ul data-role="listview" data-inset="true">
 				<li data-role="fieldcontain">
-					<label for="name">Name : </label>
+					<label for="input-event-name">Name</label>
 					<input type="text" name="name" id="input-event-name" value="" />
 				</li>
 				<li data-role="fieldcontain" data-inset="true">
-					<label for="date">Date : </label> 
+					<label for="input-event-date">Date</label> 
 					<input type="text" name="date" id="input-event-date" value="" />
 				</li>
+				
+				
+				<li data-role="fieldcontain" data-inset="true">
+				
+				<fieldset data-role="controlgroup">
+					<legend>Choose a pet:</legend>
+			     	<input type="radio" name="radio-choice" id="input-event-enumType-enumValue" value="" checked="checked" />
+			     	<label for="input-event-enumType-enumValue">Event.</label>
+				
+			     	<input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2"  />
+			     	<label for="radio-choice-2">Dog</label>
+				
+			     	<input type="radio" name="radio-choice" id="radio-choice-3" value="choice-3"  />
+			     	<label for="radio-choice-3">Hamster</label>
+				
+			     	<input type="radio" name="radio-choice" id="radio-choice-4" value="choice-4"  />
+			     	<label for="radio-choice-4">Lizard</label>
+					</fieldset>
+				</li>
+				
+				
+				<li data-role="fieldcontain" data-inset="true">
+					<label for="input-event-booleantype">BooleanType</label>
+					<input type="checkbox" name="booleanType" id="input-event-booleantype" class="custom"/>
+				</li>
+				
+				
+				
+				
+				
 			</ul>
 			<input type="hidden" name="id" id="input-event-id" /> 
 			<input type="hidden" name="version" id="input-event-version" /> 
